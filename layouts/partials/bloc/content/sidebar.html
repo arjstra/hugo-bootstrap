@@ -7,13 +7,11 @@
     {{ end }}
 
     <div class="section">
-      <header><div class="title"><b>Latest Posts</b></div></header>
+      <header><div class="title"><b>RECENTS</b></div></header>
       <div class="content">
-        <ul>
+        <ul class="sidebar-ul">
         {{ range first 10 (where .Site.Pages "Type" "post") }}
-          <li>
-          <a href="{{ .Permalink }}" class="clearfix">{{ .Title }}</a>
-          </li>
+          <li class="sidebar-li"><a href="{{ .Permalink }}">{{ .Title }}</a></li>
         {{ end }}
         </ul>
       </div>
@@ -26,8 +24,8 @@
         <header><div class="title"><b>{{ $key | singularize }}</b></div></header>
 
         <div class="content">
-          <ul>
-            {{ range first 10 $value.ByCount }}<li><a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}">{{ .Name }}</a></li>{{ end }}
+          <ul class="sidebar-ul">
+            {{ range first 10 $value.ByCount }}<li class="sidebar-li"><a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}">{{ .Name }}</a></li>{{ end }}
           </ul>
         </div>
       </div>
