@@ -1,5 +1,5 @@
 <div>
-  {{ if and .IsPage (eq .Params.toc true) }}
+    {{ if and .IsPage (eq .Params.toc true) }}
     <div class="section">
       <header><div class="title">TableOfContents</div></header>
       <div class="list-default">{{ .TableOfContents }}</div>
@@ -21,8 +21,7 @@
       {{ $len := len $value }}
       {{ if (not ( eq $len 0 ) ) }}
       <div class="section taxonomies">
-        <header><div class="title"><b>{{ $key | singularize }}</b></div></header>
-
+        <header><div class="title"><b>{{ $key | singularize | upper }}</b></div></header>
         <div class="content">
           <ul class="sidebar-ul">
             {{ range first 10 $value.ByCount }}<li class="sidebar-li"><a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}">{{ .Name }}</a></li>{{ end }}
@@ -32,4 +31,19 @@
       {{ end }}
     {{ end }}
 
+    {{ range $key, $value := .Site.Taxonomies }}
+      {{ if (eq $key "tag") }}
+        {{ $len := len $value }}
+        {{ if (not ( eq $len 0 ) ) }}
+        <div class="section taxonomies">
+          <header><div class="title"><b>TAG CLOUD</b></div></header>
+          <div class="content">
+            {{ range first 50 $value.ByCount }}
+              <a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}" class="label label-primary">{{ .Name }}</a>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      {{ end }}
+    {{ end }}
 </div>
