@@ -30,8 +30,8 @@
     {{ range .Keywords }}
 <meta property="og:article:tag" content="{{ . }}">
     {{ end }}
-  {{ else if isset .Params "tags" }}
-    {{ range .Params.tags }}
+  {{ else if isset .Params "tag" }}
+    {{ range .Params.tag }}
 <meta property="og:article:tag" content="{{ . }}">
     {{ end }}
   {{ end }}
